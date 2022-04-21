@@ -1,0 +1,97 @@
+spring:
+  application:
+    name: core-svc
+  redis:
+    host: localhost
+    port: 6397
+    password: 'hiep132'
+    lettuce:
+      pool:
+        max-active: 7
+        max-idle: 7
+        min-idle: 2
+        max-wait: -1ms
+      shutdown-timeout: 200ms
+  servlet:
+    multipart:
+      max-file-size: 100MB
+      max-request-size: 100MB
+  data:
+    mongodb:
+      host: localhost
+      port: 27017
+      database: 'chat_app'
+      username: 'hiepnh'
+      password: 'hiep132'
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: 'hiepnh'
+    password: 'hiep132'
+  mail:
+    host: smtp.gmail.com
+    username: lgsp.system123456@gmail.com
+    password: jecwmlammkafikoo
+    port: 587
+    protocol: smtp
+    smtp:
+      connectiontimeout: 5000
+      timeout: 5000
+      writetimeout: 5000
+      auth: true
+      starttls:
+        enable: true
+
+rabbitmq:
+  exchange: 'exchange.topic.event'
+  queue:
+    message: 'event.queue.message'
+  routing_key:
+    message: 'event.message'
+
+server:
+  port: ${CORE_SVC_PORT:33000}
+  http2:
+    enabled: true
+  compression:
+    enabled: true
+    mime-types: application/json
+    min-response-size: 1024
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: ${EUREKA_URI:http://localhost:30000/eureka/}
+
+logging:
+  config: config/log4j2.xml
+
+hystrix:
+  command:
+    default:
+      execution:
+        timeout:
+          enabled: false
+
+zuul:
+  host:
+    socket-timeout-millis: 10000
+    connect-timeout-millis: 10000
+
+ribbon:
+  ConnectTimeout: 10000
+  ReadTimeout: 10000
+
+elasticsearch:
+  host: 192.168.50.33
+  port: 9300
+  clusterName: lgsp-application
+  index: logback-lgsp
+
+application:
+  aws:
+    access_key_id: 'AKIA55DSS5TH32Z5JN4Z'
+    secret_access_key: '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'
+    s3:
+      bucket: 'hiepnhchatapp'
+      region: 'us-east-2'
